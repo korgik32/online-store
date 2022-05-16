@@ -1,0 +1,47 @@
+.basketItem {
+    display: flex ;
+    justify-content: space-around;
+    align-items: center;
+    height: 120px;
+    /* Rectangle 19 */
+  padding: 0px 20px 0px 20px;
+  box-sizing: border-box;
+  
+  background: #FFFFFF;
+  border: 1px solid #F3F3F3;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  }
+  .basketItem__text {
+    flex: 0 0 50%;
+    margin-left: 5px;
+  }
+  .text__title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  
+  color: #000000;
+  
+  margin-bottom: 8px;
+  }
+  .text__price {
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  
+  color: #000000;
+  
+  
+  
+  }
+  
+  .text__Xmark{
+    cursor: pointer;
+  }
