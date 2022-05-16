@@ -11,6 +11,11 @@ function SideBasket() {
             </div>
             <div className={s.flex1}>
                 <SideBasketProduct />
+                <SideBasketProduct />
+                <SideBasketProduct />
+                <SideBasketProduct />
+                <SideBasketProduct />
+                <SideBasketProduct />
             </div>
 
             <div class={s.payment}>
