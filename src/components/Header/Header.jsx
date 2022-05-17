@@ -18,7 +18,7 @@ const Header = () => {
                     <div className={s.basket__price}><span>124</span>руб.</div>
                 </li>
                 <li>
-                    <img src='/img/likes.svg' alt='(((' className={s.profile__likes}></img>
+                    <img src='/img/profile_like.svg' alt='(((' className={s.profile__likes}></img>
                 </li>
                 <li>
                     <img src='/img/profile.svg' className={s.profile__profile}></img>

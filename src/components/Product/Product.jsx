@@ -19,7 +19,7 @@ const Product = () => {
                     <div className={s.price__title}>Цена:</div>
                     <div className={s.price__price}>12 999 руб.</div>
                 </section>
-                <img className={s.price__button} src='/img/plus.svg' alt='((('></img>
+                <img className={s.price__button} src='/img/plus-active.svg' alt='((('></img>
             </div>
         </div>
     );
