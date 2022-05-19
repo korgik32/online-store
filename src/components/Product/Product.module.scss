@@ -19,7 +19,9 @@
     .product__image {
       width: 133px;
       height: 112px;
-      padding: 0px 0px 14px 0px;
+      margin: 0px 0px 14px 0px;
+      border-radius: 10px;
+      box-sizing: content-box;
     }
     .like {
       position: absolute;

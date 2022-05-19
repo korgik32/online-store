@@ -1,7 +1,7 @@
 import s from "./Header.module.scss";
-import React from "react";
+import React, { useState } from "react";
 
-const Header = () => {
+const Header = (props) => {
 
     return (
         <header>
@@ -13,8 +13,8 @@ const Header = () => {
                 </section>
             </div>
             <ul className={s.header__profile}>
-                <li className={s.profile__basket}>
-                    <img src="/img/basket.svg" className={s.basket__basket}></img>
+                <li onClick={props.onClickBasket} className={s.profile__basket}>
+                    <img onClick={props.onClickBusket} src="/img/basket.svg" className={s.basket__basket}></img>
                     <div className={s.basket__price}><span>124</span>руб.</div>
                 </li>
                 <li>
