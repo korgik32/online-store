@@ -3,20 +3,17 @@ import s from "./Product.module.scss";
 
 
 const Product = (props) => {
-
     const [plusStatus, setPlus] = React.useState(false);
     const [likeStatus, setLike] = useState(false);
 
     const onClickPlus = () => {
+        props.onPlus(props.self)
         setPlus(!plusStatus);
     }
 
     const onClickLike = () => {
         setLike(!likeStatus);
     }
-    /*  useEffect(() => {
-         console.log("aaaa");
-     }); */
 
 
 
