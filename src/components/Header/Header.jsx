@@ -2,7 +2,6 @@ import s from "./Header.module.scss";
 import React, { useState } from "react";
 
 const Header = (props) => {
-
     return (
         <header>
             <div className={s.header__logo}>
@@ -14,14 +13,14 @@ const Header = (props) => {
             </div>
             <ul className={s.header__profile}>
                 <li onClick={props.onClickBasket} className={s.profile__basket}>
-                    <img onClick={props.onClickBusket} src="/img/basket.svg" className={s.basket__basket}></img>
+                    <img onClick={props.onClickBusket} src="/img/basket.svg" alt="(((" className={s.basket__basket}></img>
                     <div className={s.basket__price}><span>124</span>руб.</div>
                 </li>
                 <li>
                     <img src='/img/profile_like.svg' alt='(((' className={s.profile__likes}></img>
                 </li>
                 <li>
-                    <img src='/img/profile.svg' className={s.profile__profile}></img>
+                    <img src='/img/profile.svg' alt="(((" className={s.profile__profile}></img>
                 </li>
             </ul>
 
