@@ -2,21 +2,19 @@ import s from "./SideBasket.module.scss";
 import React from "react";
 import SideBasketProduct from "./SideBasketProduct/SideBaskedProduct";
 
-function SideBasket({ basketProducts = [], onClickClose, }) {
+function SideBasket(props) {
 
     return (
         <div className={s.overlay}>
             <div className={s.sideBasket}>
-                <div onClick={onClickClose} className={s.sideBasket__close}>
+                <div onClick={props.onClickClose} className={s.sideBasket__close}>
                     <h2>Корзина </h2>
                     <img style={{ cursor: "pointer" }} src='/img/CloseBasket.svg' alt="((("></img>
                 </div>
                 <div className={s.flex1}>
-                    {basketProducts.map(elem =>
-                        <SideBasketProduct name={elem.name} img={elem.img} price={elem.price} />
+                    {props.basketProducts.map((elem, index) =>
+                        <SideBasketProduct deleteFromBasket={props.deleteFromBasket} basketProduct={elem} key={index} />
                     )}
-
-
                 </div>
 
                 <div className={s.payment}>
