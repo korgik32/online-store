@@ -1,0 +1,135 @@
+.favorites__products{
+    background: rgb(255, 255, 255);
+    padding: 40px 20px 0px 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: 50vh;
+  }
+
+.title__block{
+    display: flex;
+    background: rgb(255, 255, 255);
+    padding: 40px 20px 42px 60px;
+    color: #979595;
+}
+.favorites {
+  min-height: 100%;
+ 
+}
+.buttonBack {
+    margin: 0px 21px 0px 0px;
+
+}
+.title {
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 39px;
+/* identical to box height */
+
+color: #000000;
+
+
+}
+.nope_title{
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 29px;
+/* identical to box height */
+text-align: center;
+
+color: #000000;
+margin-bottom: 10px;
+
+
+}
+.nope_text{
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+
+color: #000000;
+
+opacity: 0.4;
+margin-bottom: 70px;
+
+}
+
+.nope_favorites{
+  img{
+    display: block;
+    margin:0 auto 30px auto;
+  }
+}
+////////////////////////////////////////////////////////////////////
+.nope_favorites {
+  
+  .greenBtn{
+    position: relative;
+    width: 100%;
+    
+    .comeBackArrow{
+      left: 50px;
+      top: 21px;
+      position: absolute;
+      transition: transform 0.15s ease-in-out;
+  
+    }
+   
+    &:hover .fowardArrow{
+      transform: translateX(10px); 
+    }
+    &:hover .comeBackArrow{
+      transform: translateX(-10px); 
+    }
+  }
+    li{
+      display: flex;
+      margin-bottom: 19px;
+    }
+
+    div{
+      transform: translateY(-4px);
+
+      margin: 0px 7px 0px 7px;
+      flex:1;
+      border-bottom:#d3d0d0 dashed 1.5px;
+    }
+  }
+
+  .greenBtn{
+  
+    height: 55px;
+    background: #9DD558;
+    border-radius: 18px;
+    border: none;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    
+    color: #FFFFFF;
+    
+    
+    transition: 0.5s ease, border 0.1ms ease;
+    &:hover{
+     
+      background: #bbee7d;
+  
+      
+    }
+    
+    
+      }
