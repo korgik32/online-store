@@ -14,9 +14,9 @@ const Products = (props) => {
             <main>
                 {
                     props.products
-                        .filter((elem => elem.name.toLowerCase().includes(contexts.changeInput.toLowerCase())))
+                        ?.filter((elem => elem.name.toLowerCase().includes(contexts.changeInput.toLowerCase())))
                         .map((elem, index) => <Product
-                            key={index}
+                            key={elem.id}
                             img={elem.img}
                             price={elem.price}
                             name={elem.name}

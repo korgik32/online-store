@@ -14,9 +14,8 @@ function Favorites(props) {
                 {props.faworiteProducts.length
                     ?
                     props.faworiteProducts
-                        .filter((elem => elem.name.toLowerCase().includes(changeInput.toLowerCase())))
                         .map((elem, index) => <Product
-                            key={index}
+                            key={elem.id}
                             img={elem.img}
                             price={elem.price}
                             name={elem.name}

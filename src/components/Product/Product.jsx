@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Context from "../../Context";
 import s from "./Product.module.scss";
 
 
@@ -6,6 +7,7 @@ const Product = (props) => {
     const [plusStatus, setPlus] = React.useState(false);
     const [likeStatus, setLike] = useState(false);
 
+    const { addInFavorites, deleteFromFavorites, } = useContext(Context)
     const onClickPlus = () => {
         props.onPlus(props.self)
         setPlus(!plusStatus);
@@ -13,14 +15,18 @@ const Product = (props) => {
 
     const onClickLike = () => {
         setLike(!likeStatus);
-    }
 
+
+
+    }
 
 
     return (
         <div className={s.product}>
             <img alt='(((' src={props.img} className={s.product__image}></img>
-            <img className={s.like} src={likeStatus ? '/img/likes-active.svg' : '/img/likes.svg'} onClick={onClickLike} alt='((('></img>
+            <img className={s.like}
+                src={likeStatus ? '/img/likes-active.svg' : '/img/likes.svg'}
+                onClick={() => { onClickLike(); addInFavorites(props.self)/* deleteFromFavorites(props.self) */ }} alt='((('></img>
             <div className={s.profuct__name}>{props.name}</div>
             <div className={s.product__price}>
                 <section>
