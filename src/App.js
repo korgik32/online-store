@@ -21,70 +21,101 @@ function App() {
   const [changeInput, setChangeInput] = useState("");
   //список избранного
   const [favorites, setFavorites] = useState([])
+  //история покупок
   const [history, setHistory] = useState([])
+  // состояние загрузки
+  const [productsLoading, setProductsLoading] = useState(true)
 
   //получить список продуктов
   useEffect(() => {
-    fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/products")
-      .then(response => response.json())
-      .then(result => { setProducts(result) })
-    fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket")
-      .then(response => response.json())
-      .then(result => setBasketProducts(result))
-    fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites")
-      .then(response => response.json())
-      .then(result => setFavorites(result))
-    fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/history")
-      .then(response => response.json())
-      .then(result => setHistory(result))
+    async function wait() {
+      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket")
+        .then(response => response.json())
+        .then(result => setBasketProducts(result))
+      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites")
+        .then(response => response.json())
+        .then(result => setFavorites(result))
+      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/products")
+        .then(response => response.json())
+        .then(result => { setProducts(result) })
+      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/history")
+        .then(response => response.json())
+        .then(result => setHistory(result))
+      setProductsLoading(false)
+    }
+    wait()
 
   }, [])
   //добавить в корзину 
-  const addInBasket = async (productData) => {
+  const addInBasket = (productData) => {
     //добавляем на мокАпи
-    await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(productData)
-    })
-    /* setBasketProducts(prev => [...prev, productData] */
+    try {
+      fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(productData)
+      }).then(response => response.json()).then(result => setBasketProducts(prev => [...prev, result]))
+
+
+    } catch (error) {
+      alert("error addInBasket")
+    }
+
   }
   //удалить из корзины и на сервере и на клиенте
   const deleteFromBasket = (product) => {
-    fetch(`https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket/${product.id}`, {
-      method: "DELETE"
-    })
-    setBasketProducts(basketProducts.filter((elem) => elem != product))
+    try {
+      fetch(`https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket/${product.id}`, {
+        method: "DELETE"
+      })
+      setBasketProducts(basketProducts.filter((elem) => elem != product))
+    } catch (error) {
+      alert("error deleteFromBasket")
+    }
+
   }
   //поиск товаров
   const search = (event) => {
     setChangeInput(event.target.value)
   }
-  const addInFavorites = async (productData) => {
-    await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(productData)
-    })
-    setFavorites(prev => [...prev, productData])
+  const addInFavorites = (productData) => {
+    try {
+      fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(productData)
+      }).then(response => response.json()).then(result => setFavorites(prev => [...prev, result]))
+    } catch (error) {
+      alert("error addInFavoriter")
+    }
+
+
+
+
   }
 
   const deleteFromFavorites = (product) => {
-    fetch(`https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites/${product.id}`, {
-      method: "DELETE"
-    })
-    setFavorites(favorites.filter(elem => elem != product))
+    try {
+      fetch(`https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites/${product.id}`, {
+        method: "DELETE"
+      })
+      setFavorites(favorites.filter(elem => elem != product))
+    } catch (error) {
+      alert("error deleteFromFavorites")
+    }
+
   }
   const addInHistory = () => {
 
   }
   return (
     <Context.Provider value={{
-      addInBasket, changeInput, search, addInFavorites, deleteFromFavorites, favorites
+      addInBasket, changeInput, search, addInFavorites, deleteFromFavorites, favorites,
+      deleteFromBasket, basketProducts, productsLoading
     }
     }>
       <div className='wrapper'>

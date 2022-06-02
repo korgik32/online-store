@@ -5,6 +5,7 @@ import Product from "../Product/Product";
 import Search from "../Search/Search";
 const Products = (props) => {
     const contexts = useContext(Context);
+    console.log(contexts.productsLoading);
     return (
         <div>
             <div className={s.searchBlock}>
@@ -13,17 +14,25 @@ const Products = (props) => {
             </div>
             <main>
                 {
-                    props.products
-                        ?.filter((elem => elem.name.toLowerCase().includes(contexts.changeInput.toLowerCase())))
-                        .map((elem, index) => <Product
-                            key={elem.id}
-                            img={elem.img}
-                            price={elem.price}
-                            name={elem.name}
-                            onPlus={(productData) => { contexts.addInBasket(productData) }}
-                            onLike={() => alert("Лайк")}
-                            self={elem}
-                        />)
+                    contexts.productsLoading
+                        ? [...Array(8)].map((elem, index) =>
+                            <Product
+                                key={index}
+                                loading={contexts.productsLoading}
+                            />
+                        )
+                        : props.products
+                            .filter((elem => elem.name.toLowerCase().includes(contexts.changeInput.toLowerCase())))
+                            .map((elem) => <Product
+                                key={elem.id}
+                                img={elem.img ? elem.img : null}
+                                price={elem.price}
+                                name={elem.name}
+                                self={elem}
+                                liked={Boolean(contexts.favorites.find(fElem => elem.img == fElem.img && fElem.name == elem.name && fElem.price == elem.price))}
+                                plused={Boolean(contexts.basketProducts.find(bElem => elem.img == bElem.img && bElem.name == elem.name && bElem.price == elem.price))}
+                                loading={contexts.productsLoading}
+                            />)
                 }
             </main>
         </div>

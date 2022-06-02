@@ -20,7 +20,7 @@ function Favorites(props) {
                             price={elem.price}
                             name={elem.name}
                             onPlus={(productData) => { addInBasket(productData) }}
-                            onLike={() => alert("Лайк")}
+                            liked={true}
                             self={elem}
                         />)
                     :
