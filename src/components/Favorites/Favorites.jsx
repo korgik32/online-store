@@ -19,8 +19,6 @@ function Favorites(props) {
                             img={elem.img}
                             price={elem.price}
                             name={elem.name}
-                            onPlus={(productData) => { addInBasket(productData) }}
-                            liked={true}
                             self={elem}
                         />)
                     :

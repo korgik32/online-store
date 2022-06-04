@@ -1,8 +1,10 @@
 .basketItem {
+  
     display: flex ;
     justify-content: space-around;
     align-items: center;
     height: 120px;
+    min-width: 100%;
     /* Rectangle 19 */
   padding: 0px 20px 0px 20px;
   box-sizing: border-box;

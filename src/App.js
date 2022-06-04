@@ -1,16 +1,16 @@
-import './App.scss';
-import Product from './components/Product/Product';
-import Header from './components/Header/Header';
-import Search from './components/Search/Search';
-import SideBasket from './components/SideBasket/SideBasket';
 import { useEffect, useState } from 'react';
-import Context from './Context';
+import { Route, Routes } from 'react-router-dom';
+import './App.scss';
 import Favorites from './components/Favorites/Favorites';
-import Products from './components/Products/Products';
+import Header from './components/Header/Header';
 import History from './components/History/History';
-import { Routes, Route } from 'react-router-dom';
+import Products from './components/Products/Products';
+import SideBasket from './components/SideBasket/SideBasket';
+import Context from './Context';
 
 function App() {
+  //номер заказа
+  const [orderNumber, setOrderNumber] = useState("")
   //открыть корзину
   const [openBasket, setOpenBasket] = useState(false);
   //список продуктов
@@ -35,12 +35,12 @@ function App() {
       await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites")
         .then(response => response.json())
         .then(result => setFavorites(result))
-      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/products")
-        .then(response => response.json())
-        .then(result => { setProducts(result) })
       await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/history")
         .then(response => response.json())
         .then(result => setHistory(result))
+      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/products")
+        .then(response => response.json())
+        .then(result => setProducts(result))
       setProductsLoading(false)
     }
     wait()
@@ -56,7 +56,9 @@ function App() {
           'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(productData)
-      }).then(response => response.json()).then(result => setBasketProducts(prev => [...prev, result]))
+      })
+        .then(response => response.json())
+        .then(result => setBasketProducts(prev => [...prev, result]))
 
 
     } catch (error) {
@@ -65,9 +67,9 @@ function App() {
 
   }
   //удалить из корзины и на сервере и на клиенте
-  const deleteFromBasket = (product) => {
+  const deleteFromBasket = async (product) => {
     try {
-      fetch(`https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket/${product.id}`, {
+      await fetch(`https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket/${product.id}`, {
         method: "DELETE"
       })
       setBasketProducts(basketProducts.filter((elem) => elem != product))
@@ -76,10 +78,7 @@ function App() {
     }
 
   }
-  //поиск товаров
-  const search = (event) => {
-    setChangeInput(event.target.value)
-  }
+
   const addInFavorites = (productData) => {
     try {
       fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites", {
@@ -88,16 +87,14 @@ function App() {
           'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(productData)
-      }).then(response => response.json()).then(result => setFavorites(prev => [...prev, result]))
+      })
+        .then(response => response.json())
+        .then(result => setFavorites(prev => [...prev, result]))
     } catch (error) {
       alert("error addInFavoriter")
     }
-
-
-
-
   }
-
+  //удалить из избранного
   const deleteFromFavorites = (product) => {
     try {
       fetch(`https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites/${product.id}`, {
@@ -109,13 +106,40 @@ function App() {
     }
 
   }
-  const addInHistory = () => {
+  //добавить в историю покупок
+  const addInHistory = (products) => {
+    fetch("https://629b4d38656cea05fc36ea9e.mockapi.io/history", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({ products })
+    })
+      .then(response => response.json())
+      .then(result => setOrderNumber(result.id))
 
+  }
+  //проверка сердечка
+  const isProductLiked = (product) => {
+    return favorites.some(elem => compareTwoProducts(elem, product))
+  }
+  //проверка плюсика
+  const isProductPlused = (product) => {
+    return basketProducts.some(elem => compareTwoProducts(elem, product))
+  }
+  //сравнение
+  const compareTwoProducts = (one, two) => {
+    return one.img == two.img && one.name == two.name && one.price == two.price
+  }
+  //поиск товаров
+  const search = (event) => {
+    setChangeInput(event.target.value)
   }
   return (
     <Context.Provider value={{
       addInBasket, changeInput, search, addInFavorites, deleteFromFavorites, favorites,
-      deleteFromBasket, basketProducts, productsLoading
+      deleteFromBasket, basketProducts, productsLoading, compareTwoProducts, isProductPlused,
+      isProductLiked, setBasketProducts, addInHistory, orderNumber
     }
     }>
       <div className='wrapper'>
