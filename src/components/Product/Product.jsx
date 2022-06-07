@@ -13,8 +13,6 @@ const Product = ({ loading, ...props }) => {
         if (current)
             deleteFromBasket(current)
         else addInBasket(props.self)
-
-
     }
 
     const onClickLike = () => {
@@ -22,7 +20,6 @@ const Product = ({ loading, ...props }) => {
         if (current)
             deleteFromFavorites(current)
         else addInFavorites(props.self)
-
     }
 
     return (
@@ -31,16 +28,27 @@ const Product = ({ loading, ...props }) => {
                 :
                 <>
                     <img alt='(((' src={props.self.img} className={s.product__image}></img>
-                    <img className={s.like}
-                        src={isProductLiked(props.self) ? '/img/likes-active.svg' : '/img/likes.svg'}
-                        onClick={() => { onClickLike() }} alt='((('></img>
+
+                    {!props.disabledButtons
+                        &&
+                        <img className={s.like}
+                            src={isProductLiked(props.self) ? '/img/likes-active.svg' : '/img/likes.svg'}
+                            onClick={() => { onClickLike() }} alt='((('>
+                        </img>}
                     <div className={s.profuct__name}>{props.self.name}</div>
                     <div className={s.product__price}>
                         <section>
                             <div className={s.price__title}>Цена:</div>
                             <div className={s.price__price}>{props.self.price} руб.</div>
                         </section>
-                        <img className={s.price__button} src={isProductPlused(props.self) ? `/img/plus-active.svg` : `/img/plus.svg`} onClick={onClickPlus} alt='((('></img>
+                        {!props.disabledButtons
+                            &&
+                            <img
+                                className={s.price__button}
+                                src={isProductPlused(props.self) ? `/img/plus-active.svg` : `/img/plus.svg`}
+                                onClick={onClickPlus}
+                                alt='((('>
+                            </img>}
                     </div>
                 </>
             }

@@ -1,8 +1,11 @@
 import s from "./Header.module.scss";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Context from "../../Context";
 
 const Header = (props) => {
+    const { basketProducts } = useContext(Context);
+    let totalPrice = basketProducts.reduce((prev, elem) => prev += elem.price, 0);
     return (
         <header>
             <Link style={{ textDecoration: "none" }} to="">
@@ -18,7 +21,7 @@ const Header = (props) => {
 
                 <li onClick={props.onClickBasket} className={s.profile__basket}>
                     <img onClick={props.onClickBusket} src="/img/basket.svg" alt="(((" className={s.basket__basket}></img>
-                    <div className={s.basket__price}><span>124</span>руб.</div>
+                    <div className={s.basket__price}><span>{totalPrice}</span>руб.</div>
                 </li>
 
                 <li>

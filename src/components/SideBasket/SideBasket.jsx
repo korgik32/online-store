@@ -6,6 +6,7 @@ import Context from "../../Context";
 function SideBasket(props) {
     const contexts = useContext(Context)
     const [orderStatus, setOrderStatus] = useState(false);
+    let totalPrice = contexts.basketProducts.reduce((prev, elem) => prev += elem.price, 0);
     const onOrder = async () => {
         setOrderStatus(true);
         contexts.addInHistory(contexts.basketProducts)
@@ -22,7 +23,7 @@ function SideBasket(props) {
         }
     }
     return (
-        <div className={s.overlay}>
+        <div id="overlay" className={s.overlay}>
             <div className={s.sideBasket}>
                 <div onClick={props.onClickClose} className={s.sideBasket__close}>
                     <h2>Корзина </h2>
@@ -54,12 +55,12 @@ function SideBasket(props) {
                             <li>
                                 <p className={s.payment__total}>Итого:</p>
                                 <div></div>
-                                <p className={s.payment__price}>10000 руб.</p>
+                                <p className={s.payment__price}>{totalPrice} руб.</p>
                             </li>
                             <li>
                                 <p className={s.payment__total}>Скидка 5%:</p>
                                 <div></div>
-                                <p className={s.payment__price}>10000 руб.</p>
+                                <p className={s.payment__price}>{Math.round(totalPrice * 0.05)} руб.</p>
                             </li>
                         </ul>
                         <button onClick={onOrder} className={s.greenBtn}>

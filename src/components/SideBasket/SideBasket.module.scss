@@ -1,7 +1,7 @@
 .overlay{
   
   overflow: auto;
-  position: absolute;
+  position: fixed;
   top:0;
   left: 0;
   width: 100vw;
@@ -192,9 +192,9 @@ opacity: 0.4;
 
     }
   }
-@media(max-width: 963px) {
+@media(max-width: 1040px) {
   .sideBasket{
-    min-width: 325px;
+    min-width: 364px;
   }
 }
   

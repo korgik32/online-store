@@ -25,26 +25,28 @@ function App() {
   const [history, setHistory] = useState([])
   // состояние загрузки
   const [productsLoading, setProductsLoading] = useState(true)
-
   //получить список продуктов
   useEffect(() => {
     async function wait() {
-      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket")
-        .then(response => response.json())
-        .then(result => setBasketProducts(result))
-      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites")
-        .then(response => response.json())
-        .then(result => setFavorites(result))
-      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/history")
-        .then(response => response.json())
-        .then(result => setHistory(result))
-      await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/products")
-        .then(response => response.json())
-        .then(result => setProducts(result))
-      setProductsLoading(false)
+      try {
+        await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/basket")
+          .then(response => response.json())
+          .then(result => setBasketProducts(result))
+        await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/favorites")
+          .then(response => response.json())
+          .then(result => setFavorites(result))
+        await fetch("https://629b4d38656cea05fc36ea9e.mockapi.io/history")
+          .then(response => response.json())
+          .then(result => setHistory(result.map(elem => elem.products).flat()))
+        await fetch("https://628a5b66e5e5a9ad3223b0b8.mockapi.io/products")
+          .then(response => response.json())
+          .then(result => setProducts(result))
+        setProductsLoading(false)
+      } catch (error) {
+        alert(error)
+      }
     }
     wait()
-
   }, [])
   //добавить в корзину 
   const addInBasket = (productData) => {
@@ -108,6 +110,7 @@ function App() {
   }
   //добавить в историю покупок
   const addInHistory = (products) => {
+    setHistory((prev) => [...prev, ...products]);
     fetch("https://629b4d38656cea05fc36ea9e.mockapi.io/history", {
       method: "POST",
       headers: {
@@ -139,19 +142,21 @@ function App() {
     <Context.Provider value={{
       addInBasket, changeInput, search, addInFavorites, deleteFromFavorites, favorites,
       deleteFromBasket, basketProducts, productsLoading, compareTwoProducts, isProductPlused,
-      isProductLiked, setBasketProducts, addInHistory, orderNumber
+      isProductLiked, setBasketProducts, addInHistory, orderNumber, history, setHistory
     }
     }>
       <div className='wrapper'>
         {openBasket ? <SideBasket basketProducts={basketProducts} deleteFromBasket={deleteFromBasket} onClickClose={() => { setOpenBasket(false); document.getElementsByTagName("body")[0].style.overflow = "visible"; }} /> : null}
-        <Header onClickBasket={() => { setOpenBasket(true); document.getElementsByTagName("body")[0].style.overflow = "hidden"; }} />
+        <Header onClickBasket={() => {
+          setOpenBasket(true);
+          document.getElementsByTagName("body")[0].style.overflow = "hidden";
+        }} />
         <Routes>
           <Route path="/" element={<Products products={products}></Products>} />
           <Route path='/Favorites' element={<Favorites faworiteProducts={favorites}></Favorites>} />
-          <Route path='/History' element={<History historyProducts={history}></History>} />
+          <Route path='/History' element={<History ></History>} />
           <Route path='*' element={<center>Такой страницы не существует</center>} />
         </Routes>
-
       </div>
     </Context.Provider>
   )
