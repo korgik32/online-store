@@ -1,5 +1,5 @@
 import s from "./Header.module.scss";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Context from "../../Context";
 
@@ -12,8 +12,8 @@ const Header = (props) => {
                 <div className={s.header__logo}>
                     <img className={s.logo__picture} alt='(((' src='/img/atm_money_cash_icon_221004.svg'></img>
                     <section className={s.logo__title}>
-                        <div className={s.title__title}>REACT SNEAKERS</div>
-                        <div className={s.title__text}>Магазин лучших кроссовок</div>
+                        <div className={s.title__title}>React Hardware</div>
+                        <div className={s.title__text}>Best Computers Store</div>
                     </section>
                 </div>
             </Link>

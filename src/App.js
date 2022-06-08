@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.scss';
 import Favorites from './components/Favorites/Favorites';
 import Header from './components/Header/Header';
@@ -9,6 +9,8 @@ import SideBasket from './components/SideBasket/SideBasket';
 import Context from './Context';
 
 function App() {
+  const navigate = useNavigate();
+  const goBack = () => { navigate(-1) }
   //номер заказа
   const [orderNumber, setOrderNumber] = useState("")
   //открыть корзину
@@ -43,7 +45,8 @@ function App() {
           .then(result => setProducts(result))
         setProductsLoading(false)
       } catch (error) {
-        alert(error)
+        console.log(error);
+
       }
     }
     wait()
@@ -142,11 +145,19 @@ function App() {
     <Context.Provider value={{
       addInBasket, changeInput, search, addInFavorites, deleteFromFavorites, favorites,
       deleteFromBasket, basketProducts, productsLoading, compareTwoProducts, isProductPlused,
-      isProductLiked, setBasketProducts, addInHistory, orderNumber, history, setHistory
+      isProductLiked, setBasketProducts, addInHistory, orderNumber, history, setHistory,
+      goBack
     }
     }>
       <div className='wrapper'>
-        {openBasket ? <SideBasket basketProducts={basketProducts} deleteFromBasket={deleteFromBasket} onClickClose={() => { setOpenBasket(false); document.getElementsByTagName("body")[0].style.overflow = "visible"; }} /> : null}
+        <SideBasket
+          basketProducts={basketProducts}
+          deleteFromBasket={deleteFromBasket}
+          openBasket={openBasket}
+          onClickClose={() => {
+            setOpenBasket(false);
+            document.getElementsByTagName("body")[0].style.overflow = "visible";
+          }} />
         <Header onClickBasket={() => {
           setOpenBasket(true);
           document.getElementsByTagName("body")[0].style.overflow = "hidden";

@@ -7,6 +7,7 @@ function SideBasket(props) {
     const contexts = useContext(Context)
     const [orderStatus, setOrderStatus] = useState(false);
     let totalPrice = contexts.basketProducts.reduce((prev, elem) => prev += elem.price, 0);
+
     const onOrder = async () => {
         setOrderStatus(true);
         contexts.addInHistory(contexts.basketProducts)
@@ -23,7 +24,7 @@ function SideBasket(props) {
         }
     }
     return (
-        <div id="overlay" className={s.overlay}>
+        <div className={`${s.overlay} ${props.openBasket ? s.overlayOpen : ""}`}>
             <div className={s.sideBasket}>
                 <div onClick={props.onClickClose} className={s.sideBasket__close}>
                     <h2>Корзина </h2>

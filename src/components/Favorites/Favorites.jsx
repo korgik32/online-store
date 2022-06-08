@@ -3,11 +3,12 @@ import s from "./Favorites.module.scss"
 import Product from "../Product/Product";
 import Context from "../../Context";
 function Favorites(props) {
-    const { productsLoading } = useContext(Context);
+    const { productsLoading, goBack } = useContext(Context);
+
     return (
         <div className={s.favorites}>
             <div className={s.title__block}>
-                <img className={s.buttonBack} src="/img/buttonBack.svg" alt="(((" />
+                <img onClick={goBack} className={s.buttonBack} src="/img/buttonBack.svg" alt="(((" />
                 <p className={s.title}>Мои закладки</p>
             </div>
             <div className={s.favorites__products}>
@@ -34,7 +35,7 @@ function Favorites(props) {
                             <img src="/img/sad-smile.svg" alt="(((" />
                             <h2 className={s.nope_title}>Закладок нет :(</h2>
                             <p className={s.nope_text}>Вы ничего не добавляли в закладки</p>
-                            <button className={s.greenBtn}>
+                            <button onClick={goBack} className={s.greenBtn}>
                                 <span>Вернуться назад</span>
                                 {<img className={s.comeBackArrow} src='/img/backArrow.svg' alt="((("></img>}
                             </button>

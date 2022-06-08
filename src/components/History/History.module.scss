@@ -1,15 +1,16 @@
 .history__products{
-    background: rgb(255, 255, 255);
+  background-color: rgb(252, 252, 252);
     padding: 40px 20px 0px 60px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    border-radius: 0 0 20px 20px;
     min-height: 50vh;
   }
 
 .title__block{
     display: flex;
-    background: rgb(255, 255, 255);
+    background-color: rgb(252, 252, 252);
     padding: 40px 20px 42px 60px;
     color: #979595;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Context from "../../Context";
 import s from "./Product.module.scss";
 import MyLoader from "./Loading";
@@ -26,9 +26,8 @@ const Product = ({ loading, ...props }) => {
         <div className={s.product}>
             {loading ? <MyLoader />
                 :
-                <>
+                <div className={s.product__wrapper}>
                     <img alt='(((' src={props.self.img} className={s.product__image}></img>
-
                     {!props.disabledButtons
                         &&
                         <img className={s.like}
@@ -50,7 +49,7 @@ const Product = ({ loading, ...props }) => {
                                 alt='((('>
                             </img>}
                     </div>
-                </>
+                </div>
             }
         </div>
     );
