@@ -8,6 +8,11 @@
     min-height: 50vh;
   }
 
+  @media(max-width: 830px) {
+    .history__products{
+      justify-content:center;
+    }
+  }
 .title__block{
     display: flex;
     background-color: rgb(252, 252, 252);

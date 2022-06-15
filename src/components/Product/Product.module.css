@@ -1,0 +1,113 @@
+.product {
+  position: relative;
+  padding: 20px 29px 0px 30px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 210px;
+  height: 290px;
+  background: #FFFFFF;
+  border: 1px solid #F3F3F3;
+  border-radius: 40px;
+  margin: 0px 40px 40px 0px;
+  -webkit-transition: -webkit-box-shadow 0.25s ease-in-out,-webkit-transform 0.25s ease-in-out;
+  transition: -webkit-box-shadow 0.25s ease-in-out,-webkit-transform 0.25s ease-in-out;
+  transition: box-shadow 0.25s ease-in-out,transform 0.25s ease-in-out;
+  transition: box-shadow 0.25s ease-in-out,transform 0.25s ease-in-out,-webkit-box-shadow 0.25s ease-in-out,-webkit-transform 0.25s ease-in-out;
+}
+
+.product:hover {
+  -webkit-box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.05);
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+}
+
+.product__image {
+  display: block;
+  width: 125px;
+  height: 125px;
+  border-radius: 10px;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+.like {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  height: 32px;
+  width: 32px;
+  border-radius: 7px;
+  border: 1px solid #F8F8F8;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+.like img {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 14.4px;
+  height: 12.8px;
+}
+
+.profuct__name {
+  display: block;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.product__price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.price__title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  text-transform: uppercase;
+  color: #BDBDBD;
+}
+
+.price__price {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.price__button {
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.product__wrapper {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
